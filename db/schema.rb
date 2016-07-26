@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720003644) do
+ActiveRecord::Schema.define(version: 20160726001112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,12 +29,19 @@ ActiveRecord::Schema.define(version: 20160720003644) do
 
   create_table "game_characters", force: :cascade do |t|
     t.string   "name"
-    t.integer  "level",      default: 1
-    t.integer  "xp",         default: 0
-    t.integer  "gold",       default: 0
+    t.integer  "level",            default: 1
+    t.integer  "xp",               default: 0
+    t.integer  "gold",             default: 0
     t.integer  "user_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "fitbit_token"
+    t.text     "fitbit_raw_data"
+    t.integer  "calories"
+    t.integer  "steps"
+    t.integer  "token_expires_at"
   end
 
   add_index "game_characters", ["user_id"], name: "index_game_characters_on_user_id", using: :btree
@@ -55,6 +62,7 @@ ActiveRecord::Schema.define(version: 20160720003644) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "price"
   end
 
   create_table "stats", force: :cascade do |t|

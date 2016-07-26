@@ -38,6 +38,8 @@ gem "mini_magick"
 gem 'active_model_serializers'
 gem 'omniauth-fitbit-oauth2'
 gem 'faker', github: "stympy/faker"
+gem 'faraday'
+gem 'lazy_high_charts'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

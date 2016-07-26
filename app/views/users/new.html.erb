@@ -1,0 +1,9 @@
+<h1>Create An Account</h1>
+<%= @user.errors.full_messages.join(",") %>
+<%= simple_form_for @user do |f| %>
+  <%= f.input :full_name %>
+  <%= f.input :email %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+  <%= f.button :submit %>
+<% end %>

@@ -86,6 +86,7 @@ GEM
       railties (>= 3.2, < 5.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    hash-deep-merge (0.1.1)
     hashie (3.4.4)
     hirb (0.7.3)
     i18n (0.7.0)
@@ -105,6 +106,8 @@ GEM
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    lazy_high_charts (1.5.5)
+      hash-deep-merge
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -220,12 +223,14 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.1.0)
   faker!
+  faraday
   font-awesome-rails
   hirb
   interactive_editor
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
+  lazy_high_charts
   mini_magick
   omniauth-fitbit-oauth2
   pg (~> 0.15)

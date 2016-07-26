@@ -1,0 +1,6 @@
+<h1>Character</h1>
+<% if @game_character %>
+  <p><%= link_to @game_character.name, signin_with_fitbit_path, class: "btn btn-primary" %></p>
+<% else %>
+  <%= link_to "Create_Character", signin_with_fitbit_path, class: "btn btn-warning" %>
+<% end %>
