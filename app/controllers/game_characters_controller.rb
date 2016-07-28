@@ -10,7 +10,8 @@ class GameCharactersController < ApplicationController
     @game_character = GameCharacter.find params[:id]
     $strength_xp_cost = @game_character.game_character_attributes.find_by_stat_id(13).value * 10
     $constitution_xp_cost = @game_character.game_character_attributes.find_by_stat_id(14).value * 10
-    information = char_stats_calculation(@game_character)
+    information = char_xp_gold_calculation(@game_character)
+    char_energy_calculation(@game_character, information)
     @chart = LazyHighCharts::HighChart.new('pie') do |f|
       f.chart({:defaultSeriesType=>"pie" , :margin=> [50, 200, 60, 170]} )
       series = {
@@ -81,16 +82,40 @@ class GameCharactersController < ApplicationController
     end
   end
 
+  def item_name(item)
+    i = Item.find item.item_id
+    i.name
+  end
+  helper_method :item_name
+
+  def item_description(item)
+    i = Item.find item.item_id
+    i.description
+  end
+  helper_method :item_description
+
+  def parse_strength(game_character)
+    GameCharacterStatCalculator.new(game_character).parse_strength
+  end
+  helper_method :parse_strength
+
+  def parse_constitution(game_character)
+    GameCharacterStatCalculator.new(game_character).parse_constitution
+  end
+  helper_method :parse_constitution
+
   private
 
   XP_GAINING_DENOMINATOR = 2
   GOLD_GAINING_DEMONINATOR = 6
 
+  SEDENTARY_MINUTES_TO_ENERGY_RATIO = 5
+
   def char_level_calculation(strength_xp_cost, constitution_xp_cost)
     return (strength_xp_cost + constitution_xp_cost)/ 10 / 4
   end
 
-  def char_stats_calculation(game_character)
+  def char_xp_gold_calculation(game_character)
     token = game_character.fitbit_token
     t = Time.now.strftime "%Y-%m-%d"
     u = "https://api.fitbit.com/1/user/-/activities/date/#{t}.json"
@@ -121,6 +146,17 @@ class GameCharactersController < ApplicationController
       end
     end
     information
+  end
+
+  def char_energy_calculation(game_character, information)
+    sedentary_minutes = information["summary"]["sedentaryMinutes"]
+    energy_recovery = 0
+    if sedentary_minutes >= game_character.sedentary_minutes
+      energy_recovery = (sedentary_minutes - game_character.sedentary_minutes) / SEDENTARY_MINUTES_TO_ENERGY_RATIO if game_character.energy < 100
+      game_character.update(sedentary_minutes: sedentary_minutes, energy: game_character.energy + energy_recovery)
+    else
+      game_character.update(sedentary_minutes: sedentary_minutes, energy: 100)
+    end
   end
 
 end

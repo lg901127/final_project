@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726001112) do
+ActiveRecord::Schema.define(version: 20160728013638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "enemies", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "level"
+    t.integer  "xp"
+    t.integer  "gold"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "enemy_stats", force: :cascade do |t|
+    t.integer  "enemy_id"
+    t.integer  "stat_id"
+    t.integer  "value",      default: 1
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "enemy_stats", ["enemy_id"], name: "index_enemy_stats_on_enemy_id", using: :btree
+  add_index "enemy_stats", ["stat_id"], name: "index_enemy_stats_on_stat_id", using: :btree
 
   create_table "game_character_attributes", force: :cascade do |t|
     t.integer  "game_character_id"
@@ -27,14 +47,24 @@ ActiveRecord::Schema.define(version: 20160726001112) do
   add_index "game_character_attributes", ["game_character_id"], name: "index_game_character_attributes_on_game_character_id", using: :btree
   add_index "game_character_attributes", ["stat_id"], name: "index_game_character_attributes_on_stat_id", using: :btree
 
+  create_table "game_character_items", force: :cascade do |t|
+    t.integer  "game_character_id"
+    t.integer  "item_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "game_character_items", ["game_character_id"], name: "index_game_character_items_on_game_character_id", using: :btree
+  add_index "game_character_items", ["item_id"], name: "index_game_character_items_on_item_id", using: :btree
+
   create_table "game_characters", force: :cascade do |t|
     t.string   "name"
-    t.integer  "level",            default: 1
-    t.integer  "xp",               default: 0
-    t.integer  "gold",             default: 0
+    t.integer  "level",             default: 1
+    t.integer  "xp",                default: 0
+    t.integer  "gold",              default: 0
     t.integer  "user_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "uid"
     t.string   "provider"
     t.string   "fitbit_token"
@@ -42,6 +72,8 @@ ActiveRecord::Schema.define(version: 20160726001112) do
     t.integer  "calories"
     t.integer  "steps"
     t.integer  "token_expires_at"
+    t.integer  "energy",            default: 100
+    t.integer  "sedentary_minutes", default: 0
   end
 
   add_index "game_characters", ["user_id"], name: "index_game_characters_on_user_id", using: :btree
@@ -80,8 +112,12 @@ ActiveRecord::Schema.define(version: 20160726001112) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "enemy_stats", "enemies"
+  add_foreign_key "enemy_stats", "stats"
   add_foreign_key "game_character_attributes", "game_characters"
   add_foreign_key "game_character_attributes", "stats"
+  add_foreign_key "game_character_items", "game_characters"
+  add_foreign_key "game_character_items", "items"
   add_foreign_key "game_characters", "users"
   add_foreign_key "item_stats", "items"
   add_foreign_key "item_stats", "stats"

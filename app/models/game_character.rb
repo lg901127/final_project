@@ -2,6 +2,8 @@ class GameCharacter < ActiveRecord::Base
   belongs_to :user
   has_many :game_character_attributes, dependent: :destroy
   has_many :stats, through: :game_character_attributes
+  has_many :game_character_items, dependent: :destroy
+  has_many :items, through: :game_character_items
   validates :name, presence: true
 
   def self.find_or_create_from_fitbit(fitbit_data)

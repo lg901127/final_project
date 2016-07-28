@@ -40,6 +40,7 @@ gem 'omniauth-fitbit-oauth2'
 gem 'faker', github: "stympy/faker"
 gem 'faraday'
 gem 'lazy_high_charts'
+gem 'angularjs-rails'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

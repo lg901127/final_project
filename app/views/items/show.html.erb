@@ -1,0 +1,18 @@
+<h1><%= @item.name %></h1>
+<p><%= @item.description %></p>
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= "Strength" if @strength %></th>
+      <th><%= "constitution" if @constitution %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= " + #{@strength}" if @strength %></td>
+      <td><%= " + #{@constitution}" if @constitution %></td>
+      <td><%= link_to "Buy", user_item_game_character_items_path(current_user, @item), class: "btn btn-warning", method: :post, data: {confirm: "Are you sure?"}%></td>
+    </tr>
+  </tbody>
+</table>
+<%= link_to "Back", user_items_path(current_user), class: "btn btn-primary" %>

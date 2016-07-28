@@ -5,6 +5,7 @@
       <th>Level</th>
       <th>Exp</th>
       <th>Gold</th>
+      <th>Energy</th>
       <th>Strength</th>
       <th>Constitution</th>
     </tr>
@@ -14,21 +15,39 @@
       <td><%= @game_character.level %></td>
       <td><%= @game_character.xp %></td>
       <td><%= @game_character.gold %></td>
+      <td><%= @game_character.energy %></td>
       <% if @game_character.xp > $strength_xp_cost %>
-        <td><%= @game_character.game_character_attributes.find_by_stat_id(13).value %> <%= link_to fa_icon("plus-square") + " Exp cost: #{$strength_xp_cost}", user_game_character_add_strength_path(current_user, @game_character), method: :put %> </td>
+        <td><%= parse_strength(@game_character) %> <%= link_to fa_icon("plus-square") + " Exp cost: #{$strength_xp_cost}", user_game_character_add_strength_path(current_user, @game_character), method: :put %> </td>
       <% else %>
-        <td><%= @game_character.game_character_attributes.find_by_stat_id(13).value %></td>
+        <td><%= parse_strength(@game_character) %></td>
       <% end %>
       <% if @game_character.xp > $constitution_xp_cost %>
-        <td><%= @game_character.game_character_attributes.find_by_stat_id(14).value %> <%= link_to fa_icon("plus-square") + " Exp cost: #{$constitution_xp_cost}", user_game_character_add_constitution_path(current_user, @game_character), method: :put %> </td>
+        <td><%= parse_constitution(@game_character) %> <%= link_to fa_icon("plus-square") + " Exp cost: #{$constitution_xp_cost}", user_game_character_add_constitution_path(current_user, @game_character), method: :put %> </td>
       <% else %>
-        <td><%= @game_character.game_character_attributes.find_by_stat_id(14).value %></td>
+        <td><%= parse_constitution(@game_character) %></td>
       <% end %>
     </tr>
   </tbody>
 </table>
+<ul class="media-list">
+  <% @game_character.game_character_items.each do |item| %>
+    <li class="media">
+      <a class="media-left">
+        <img class="media-object" src="https://cdn.steamstatic.com/apps/dota2/images/items/ultimate_scepter_lg.png" alt="Generic placeholder image">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading"><%= link_to item_name(item), user_item_path(current_user, item.item_id) %></h4>
+        <p><%= item_description(item) %></p>
+      </div>
+      <div class="media-right">
+        <%= link_to "Sell", user_item_game_character_item_path(current_user, @game_character, item), method: :delete, data: {confirm: "You are only gonna get half price back"}, class: "btn btn-danger" %>
+      </div>
+  <% end %>
+</ul>
 <%= high_chart("my_id4", @chart) do |c| %>
   <%= raw "options.tooltip.formatter = function() {return '<b>'+ this.point.name +'</b>: '+ this.y +' mins';}"  %>
   <%= raw "options.plotOptions.pie.dataLabels.formatter = function() { if (this.y > 5) return this.point.name; }"  %>
 <% end %>
-<%= link_to "Refresh", signin_with_fitbit_path, class: "btn btn-danger" %>
+<%= link_to "Shop", user_items_path(current_user), class: "btn btn-primary" %>
+<%= link_to "Battle", user_game_character_enemies_path(current_user, @game_character), class: "btn btn-warning" %>
+<%= link_to "Refresh", signin_with_fitbit_path, class: "btn btn-info" %>

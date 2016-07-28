@@ -1,0 +1,20 @@
+<ul class="list-group">
+  <% @enemies.each do |enemy| %>
+    <li class="list-group-item">
+      <a class="media-left">
+        <img class="media-object" src="https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/5a/Roshan_Portrait.png" alt="Generic placeholder image" width="64px" height="64px">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading"><%= enemy.name %></h4>
+        <p><%= "Level: #{enemy.level} EXP: #{enemy.xp} Gold: #{enemy.gold} Energy Cost: #{enemy.level}" %></p>
+      </div>
+      <div class="media-right">
+        <% if @game_character.energy >= enemy.level %>
+          <%= link_to "Battle", user_game_character_enemy_path(current_user, @game_character, enemy), class: "btn btn-danger" %>
+        <% else %>
+          <span class="label label-warning">Not Enough Energy</span>
+        <% end %>
+      </div>
+  <% end %>
+</ul>
+<%= link_to "Back", signin_with_fitbit_path, class: "btn btn-danger" %>

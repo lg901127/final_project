@@ -1,0 +1,6 @@
+<div class='list-group'>
+  <% @items.each do |item| %>
+    <%= link_to "#{item.name} $#{item.price}", user_item_path(current_user, item), class: "list-group-item" %>
+  <% end %>
+</div>
+<%= link_to "Back", signin_with_fitbit_path, class: "btn btn-danger" %>

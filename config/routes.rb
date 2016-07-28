@@ -7,10 +7,16 @@ Rails.application.routes.draw do
     resources :game_characters do
       put '/add_strength' => 'game_characters#add_strength', as: :add_strength
       put '/add_constitution' => 'game_characters#add_constitution', as: :add_constitution
+      resources :enemies, only: [:index, :show]
+    end
+    resources :items do
+      resources :game_character_items, only: [:create, :destroy]
     end
   end
 
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection
   end
+
+
 end

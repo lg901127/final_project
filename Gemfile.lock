@@ -48,6 +48,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    angularjs-rails (1.5.6)
     arel (6.0.3)
     autoprefixer-rails (6.3.7)
       execjs
@@ -215,6 +216,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  angularjs-rails
   awesome_print
   bcrypt (~> 3.1.7)
   bootstrap-generators (~> 3.3.4)
