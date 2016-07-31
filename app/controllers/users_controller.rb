@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @user = User.new user_params
     if @user.save
       sign_in(@user)
-      redirect_to root_path, notice: "You are now signed in!"
+      redirect_to user_path(@user), notice: "You are now signed in!"
     else
       render :new
     end

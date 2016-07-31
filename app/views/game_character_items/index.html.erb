@@ -1,0 +1,15 @@
+<ul class="media-list">
+  <% @game_character_items.each do |item| %>
+    <li class="media">
+      <a class="media-left">
+        <img class="media-object" src="https://cdn.steamstatic.com/apps/dota2/images/items/ultimate_scepter_lg.png" alt="Generic placeholder image">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading"><%= link_to item_name(item), user_item_path(current_user, item.item_id) %></h4>
+        <p><%= item_description(item) %></p>
+      </div>
+      <div class="media-right">
+        <%= link_to "Sell", user_item_game_character_item_path(current_user, @game_character, item), method: :delete, data: {confirm: "You are only gonna get half price back"}, class: "btn btn-danger" %>
+      </div>
+  <% end %>
+</ul>

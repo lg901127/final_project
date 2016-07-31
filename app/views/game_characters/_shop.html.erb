@@ -1,0 +1,14 @@
+<div ng-controller="shopController" ng-hide="shopHideStatus">
+  <ul class='list-group' ng-repeat="shopItem in shopItems" class="list-group">
+    <span item-id="shopItem.id" />
+    <li class="list-group-item list-group-item-info" ng-click="itemDetail = !itemDetail">
+      {{ shopItem.name }}  ${{ shopItem.price }}
+      <div ng-show="itemDetail">
+        <p>{{ shopItem.description }}</p>
+        <p>{{ shopItem.Strength ? "Strength: " + shopItem.Strength : "" }} {{ shopItem.Constitution ? "Constitution: " + shopItem.Constitution : "" }}</p>
+      </div>
+      <button class="pull-right">Buy</button>
+    </li>
+  </ul>
+</div>
+<div ng-show="shopHideStatus">

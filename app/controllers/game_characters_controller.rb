@@ -8,10 +8,12 @@ class GameCharactersController < ApplicationController
 
   def show
     @game_character = GameCharacter.find params[:id]
+    @game_character_items = @game_character.game_character_items
     $strength_xp_cost = @game_character.game_character_attributes.find_by_stat_id(13).value * 10
     $constitution_xp_cost = @game_character.game_character_attributes.find_by_stat_id(14).value * 10
     information = char_xp_gold_calculation(@game_character)
     char_energy_calculation(@game_character, information)
+    items_info = char_items(@game_character)
     @chart = LazyHighCharts::HighChart.new('pie') do |f|
       f.chart({:defaultSeriesType=>"pie" , :margin=> [50, 200, 60, 170]} )
       series = {
@@ -45,6 +47,10 @@ class GameCharactersController < ApplicationController
           }
         }
       })
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: items_info }
     end
   end
 
@@ -150,13 +156,32 @@ class GameCharactersController < ApplicationController
 
   def char_energy_calculation(game_character, information)
     sedentary_minutes = information["summary"]["sedentaryMinutes"]
-    energy_recovery = 0
     if sedentary_minutes >= game_character.sedentary_minutes
-      energy_recovery = (sedentary_minutes - game_character.sedentary_minutes) / SEDENTARY_MINUTES_TO_ENERGY_RATIO if game_character.energy < 100
+      if game_character.energy < 100
+        energy_recovery = (sedentary_minutes - game_character.sedentary_minutes)# / SEDENTARY_MINUTES_TO_ENERGY_RATIO
+      else
+        energy_recovery = 0
+      end
       game_character.update(sedentary_minutes: sedentary_minutes, energy: game_character.energy + energy_recovery)
     else
       game_character.update(sedentary_minutes: sedentary_minutes, energy: 100)
     end
+  end
+
+  def char_items(game_character)
+    items_info = []
+    game_character.game_character_items.each do |item|
+      item_info = {
+        name: Item.find(item.item_id).name,
+        description: Item.find(item.item_id).description,
+      }
+      Item.find(item.item_id).item_stats.each do |stat|
+        name = Stat.find(stat.stat_id).name
+        item_info[name] = stat.value
+      end
+      items_info << item_info
+    end
+    items_info
   end
 
 end

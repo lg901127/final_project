@@ -1,1 +1,29 @@
+<script>
+var tag = document.createElement('script');
 
+        tag.src = "//www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+var player;
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('background', {
+        events: {
+            'onReady': onPlayerReady
+        }
+    });
+}
+
+function onPlayerReady(event) {
+    player.mute();
+    player.playVideo();
+}
+</script>
+<iframe id="background" src="https://www.youtube.com/embed/3lxGq9tJadw?rel=0&enablejsapi=1&autoplay=1&controls=0&showinfo=0&loop=1&iv_load_policy=3" frameborder="0" allowfullscreen></iframe>
+<h1 class="col-sm-12 text-center full-height" id="project-name">Project   Name    Goes    Here</h1>
+<div class="col-sm-6 text-center full-height">
+  <%= link_to "Sign Up!", new_user_path, class: "btn btn-primary index-button"%>
+</div>
+<div class="col-sm-6 text-center full-height">
+	<%= link_to "Already an User?", new_session_path, class: "btn btn-primary index-button"%>
+</div>

@@ -1,0 +1,22 @@
+<div ng-controller="enemyController" ng-hide="enemyHideStatus">
+  <ul class="list-group" ng-repeat="enemy in enemies">
+    <li class="list-group-item">
+      <a class="media-left">
+        <img class="media-object" src="https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/5a/Roshan_Portrait.png" alt="Generic placeholder image" width="64px" height="64px">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">{{ enemy.name }}</h4>
+        <p>Level: {{ enemy.level }} Exp: {{ enemy.exp }}  Gold: {{ enemy.gold }}  Energy Cost: {{ enemy.level }}</p>
+      </div>
+      <div class="media-right">
+        <span ng-if="game_character.energy >= enemy.level">
+          <button class="btn btn-danger">Battle</button>
+        </span>
+        <span ng-if="game_character.energy < enemy.level">
+          <span class="label label-warning">Not Enough Energy</span>
+        </span>
+      </div>
+    </li>
+  </ul>
+</div>
+<div ng-show="enemyHideStatus>

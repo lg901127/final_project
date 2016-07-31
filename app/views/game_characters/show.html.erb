@@ -1,13 +1,39 @@
-<h1><%= @game_character.name %></h1>
+<div ng-app="menu">
+<h1><%= @game_character.name %> <%= link_to "Refresh", signin_with_fitbit_path, class: "btn btn-info" %></h1>
 <table class="table">
   <thead>
-    <tr>
-      <th>Level</th>
-      <th>Exp</th>
-      <th>Gold</th>
-      <th>Energy</th>
-      <th>Strength</th>
-      <th>Constitution</th>
+    <tr ng-controller="descriptionController">
+      <th class="col-sm-2">Level</th>
+      <th class="col-sm-2">
+        <a ng-mouseover="expDescription = true" ng-mouseleave="expDescription = false">
+          <%= image_tag "icons/xp.png", size: "32" %>
+        </a>
+        <span ng-show="expDescription" class="stat-descriptions">Experience</span>
+      </th>
+      <th class="col-sm-2">
+        <a ng-mouseover="goldDescription = true" ng-mouseleave="goldDescription = false">
+          <%= image_tag "icons/coin.png", size: "32" %>
+        </a>
+        <span ng-show="goldDescription">Gold</span>
+      </th>
+      <th class="col-sm-2">
+        <a ng-mouseover="energyDescription = true" ng-mouseleave="energyDescription = false">
+          <%= image_tag "icons/heart.png", size: "32" %>
+        </a>
+        <span ng-show="energyDescription">Energy</span>
+      </th>
+      <th class="col-sm-2">
+        <a ng-mouseover="strengthDescription = true" ng-mouseleave="strengthDescription = false">
+          <%= image_tag "icons/sword.png", size: "32" %>
+        </a>
+        <span ng-show="strengthDescription">Strength</span>
+      </th>
+      <th class="col-sm-2">
+        <a ng-mouseover="constitutionDescription = true" ng-mouseleave="constitutionDescription = false">
+          <%= image_tag "icons/shield.png", size: "32" %>
+        </a>
+        <span ng-show="constitutionDescription">Constitution</span>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -29,25 +55,15 @@
     </tr>
   </tbody>
 </table>
-<ul class="media-list">
-  <% @game_character.game_character_items.each do |item| %>
-    <li class="media">
-      <a class="media-left">
-        <img class="media-object" src="https://cdn.steamstatic.com/apps/dota2/images/items/ultimate_scepter_lg.png" alt="Generic placeholder image">
-      </a>
-      <div class="media-body">
-        <h4 class="media-heading"><%= link_to item_name(item), user_item_path(current_user, item.item_id) %></h4>
-        <p><%= item_description(item) %></p>
-      </div>
-      <div class="media-right">
-        <%= link_to "Sell", user_item_game_character_item_path(current_user, @game_character, item), method: :delete, data: {confirm: "You are only gonna get half price back"}, class: "btn btn-danger" %>
-      </div>
-  <% end %>
-</ul>
-<%= high_chart("my_id4", @chart) do |c| %>
-  <%= raw "options.tooltip.formatter = function() {return '<b>'+ this.point.name +'</b>: '+ this.y +' mins';}"  %>
-  <%= raw "options.plotOptions.pie.dataLabels.formatter = function() { if (this.y > 5) return this.point.name; }"  %>
-<% end %>
-<%= link_to "Shop", user_items_path(current_user), class: "btn btn-primary" %>
-<%= link_to "Battle", user_game_character_enemies_path(current_user, @game_character), class: "btn btn-warning" %>
-<%= link_to "Refresh", signin_with_fitbit_path, class: "btn btn-info" %>
+<div ng-controller="toggleController">
+  <button ng-click="toggleInventory()" class="btn btn-secondary">Inventory</button>
+  <button ng-click="toggleChart()" class="btn btn-secondary">Chart</button>
+  <button ng-click="toggleShop()" class="btn btn-secondary">Shop</button>
+  <button ng-click="toggleEnemy()" class="btn btn-secondary">Battle</button>
+  <div class="segment" />
+    <%= render "inventory" %>
+    <%= render "chart" %>
+    <%= render "shop" %>
+    <%= render "enemy_list" %>
+</div>
+</div>

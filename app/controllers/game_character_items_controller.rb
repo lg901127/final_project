@@ -1,6 +1,7 @@
 class GameCharacterItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_owner
+
   def create
     user = User.find params[:user_id]
     game_character = user.game_character

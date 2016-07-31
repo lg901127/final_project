@@ -7,6 +7,12 @@ class EnemiesController < ApplicationController
   def index
     @enemies = Enemy.order("level")
     @game_character = GameCharacter.find params[:game_character_id]
+    respond_to do |format|
+      format.html
+      format.json { render json: {enemies: @enemies,
+                                  game_character: @game_character
+                                  }}
+    end
   end
 
   def show
@@ -33,10 +39,6 @@ class EnemiesController < ApplicationController
       if game_character_hp > 0
         @battle_info << "You Win!, you earned: #{enemy.xp} EXP and #{enemy.gold} Gold!"
         game_character.update(xp: game_character.xp + enemy.xp, gold: game_character.gold + enemy.gold, energy: game_character.energy - @enemy.level)
-      #Battle should cost character energy, 5 sedentary minutes = 1 energy recovery, record sedentary_minutes everytime when refreshing
-      #the character page, minus the value in database from the current sedentary_minutes to derive energy recovery.
-      #next day the sedentary_minutes will reset, so minus from existing value will derive a negative value, so reset data base before
-      #substraction.
       else
         @battle_info << "You Lose!"
         game_character.update(energy: game_character.energy - @enemy.level)
