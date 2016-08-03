@@ -18,12 +18,18 @@ menu.controller('shopController', function($scope, $http, $location){
     $scope.shopItems = response;
   });
   $scope.itemDetail = false;
+  var buy = function(item_id) {
+    $http({
+      method: "POST",
+      url: "http://localhost:3000/users/" + user_id + "/items/" + item_id + "/game_character_items",
+    })
+  }
 });
 
 menu.controller('enemyController', function($scope, $http, $location){
-  var user_id = (/users\/(\d+)/.exec($location.absUrl())[1]);
-  var game_character_id = (/game_characters\/(\d+)/.exec($location.absUrl())[1]);
-  var url = "http://localhost:3000/users/" + user_id + "/game_characters/" + game_character_id +"/enemies.json";
+  $scope.user_id = (/users\/(\d+)/.exec($location.absUrl())[1]);
+  $scope.game_character_id = (/game_characters\/(\d+)/.exec($location.absUrl())[1]);
+  var url = "http://localhost:3000/users/" + $scope.user_id + "/game_characters/" + $scope.game_character_id +"/enemies.json";
   $http.get(url).success(function(response) {
     $scope.enemies = response.enemies;
     $scope.game_character = response.game_character

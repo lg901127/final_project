@@ -10,7 +10,7 @@
       </div>
       <div class="media-right">
         <span ng-if="game_character.energy >= enemy.level">
-          <button class="btn btn-danger">Battle</button>
+          <a ng-href="/users/{{ user_id }}/game_characters/{{ game_character_id }}/enemies/{{ enemy.id }}">Battle</a>
         </span>
         <span ng-if="game_character.energy < enemy.level">
           <span class="label label-warning">Not Enough Energy</span>

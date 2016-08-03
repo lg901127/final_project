@@ -1,0 +1,4 @@
+<%= simple_form_for(@game_character, url: user_game_character_path(current_user, @game_character)) do |f| %>
+  <%= f.input :image %>
+  <%= f.button :submit %>
+<% end %>

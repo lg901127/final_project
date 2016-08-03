@@ -16,6 +16,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -33,11 +34,11 @@ gem 'kaminari'
 gem 'simple_form'
 gem 'bootstrap-sass'
 gem 'bootstrap-generators', '~> 3.3.4'
+gem 'faker', github: "stympy/faker"
 gem 'carrierwave'
 gem "mini_magick"
 gem 'active_model_serializers'
 gem 'omniauth-fitbit-oauth2'
-gem 'faker', github: "stympy/faker"
 gem 'faraday'
 gem 'lazy_high_charts'
 gem 'angularjs-rails'
@@ -57,5 +58,5 @@ group :development do
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  # gem 'spring'
 end

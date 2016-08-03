@@ -1,0 +1,4 @@
+<%= simple_form_for(@item, url: user_item_path(current_user, @item)) do |f| %>
+  <%= f.input :image %>
+  <%= f.button :submit %>
+<% end %>

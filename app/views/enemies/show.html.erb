@@ -1,3 +1,16 @@
+<script>
+  $(document).ready(function() {
+    $(".list-group").children().hide()
+    $(".list-group").children().each(function(index) {
+    $(this).delay(1000*index).fadeIn(1000);
+    });
+  });
+</script>
+<style>
+  .list-group-item {
+    border-radius: 20px;
+  }
+</style>
 <div class="card">
   <img class="card-img-top" src="https://hydra-media.cursecdn.com/dota2.gamepedia.com/5/5a/Roshan_Portrait.png"
        alt="Card image cap">
@@ -9,8 +22,8 @@
 <div class="jumbotron-fluid">
   <div class="list-group">
     <% @battle_info.each do |round| %>
-      <a class="list-group-item list-group-item-info"> <%= round %> </a>
+      <a class="list-group-item list-group-item-info" id="round"> <%= round %> </a>
     <% end %>
+    <%= link_to "Back", signin_with_fitbit_path, class: "btn btn-danger" %>
   </div>
 </div>
-<%= link_to "Back", signin_with_fitbit_path, class: "btn btn-danger" %>

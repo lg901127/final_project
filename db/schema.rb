@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160728013638) do
+ActiveRecord::Schema.define(version: 20160803002220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20160728013638) do
     t.integer  "token_expires_at"
     t.integer  "energy",            default: 100
     t.integer  "sedentary_minutes", default: 0
+    t.string   "image"
   end
 
   add_index "game_characters", ["user_id"], name: "index_game_characters_on_user_id", using: :btree
@@ -95,6 +96,7 @@ ActiveRecord::Schema.define(version: 20160728013638) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "price"
+    t.string   "image"
   end
 
   create_table "stats", force: :cascade do |t|

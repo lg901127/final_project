@@ -2,7 +2,7 @@
   <ul ng-repeat="item in items" class="media-list">
     <li class="media">
       <a class="media-left">
-        <img class="media-object" src="https://cdn.steamstatic.com/apps/dota2/images/items/ultimate_scepter_lg.png" alt="Generic placeholder image">
+         <img src="{{item.url}}">
       </a>
       <div class="media-body">
         <h4 class="media-heading" ng-click="itemDetail = !itemDetail">{{ item.name }}</h4>

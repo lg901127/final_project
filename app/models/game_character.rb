@@ -6,6 +6,8 @@ class GameCharacter < ActiveRecord::Base
   has_many :items, through: :game_character_items
   validates :name, presence: true
 
+  mount_uploader :image, ImageUploader
+
   def self.find_or_create_from_fitbit(fitbit_data)
     game_character = GameCharacter.where(uid: fitbit_data.uid).first
     game_character = create_from_fitbit(fitbit_data) unless game_character

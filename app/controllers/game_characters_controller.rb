@@ -64,6 +64,13 @@ class GameCharactersController < ApplicationController
   def destroy
   end
 
+  def update
+    image_params = params.require(:game_character).permit(:image)
+    game_character = GameCharacter.find params[:id]
+    game_character.update(image: image_params["image"])
+    redirect_to user_path(current_user)
+  end
+
   def add_strength
     @game_character = GameCharacter.find params[:game_character_id]
     if @game_character.xp > $strength_xp_cost
@@ -174,6 +181,7 @@ class GameCharactersController < ApplicationController
       item_info = {
         name: Item.find(item.item_id).name,
         description: Item.find(item.item_id).description,
+        url: Item.find(item.item_id).image.url(:small)
       }
       Item.find(item.item_id).item_stats.each do |stat|
         name = Stat.find(stat.stat_id).name

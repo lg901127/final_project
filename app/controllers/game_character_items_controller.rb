@@ -10,10 +10,10 @@ class GameCharacterItemsController < ApplicationController
       if GameCharacterItem.give_items_to_character(game_character, item)
         redirect_to user_game_character_path(user, game_character), notice: "#{item.name} is in your inventory!"
       else
-        redirect_to user_item_path(user, item), alert: "You cannot have more than 6 items!"
+        redirect_to user_game_character_path(user, game_character), alert: "You cannot have more than 6 items!"
       end
     else
-      redirect_to user_items_path(user), alert: "Not enough gold!"
+      redirect_to user_game_character_path(user, game_character), alert: "Not enough gold!"
     end
   end
 

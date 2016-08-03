@@ -37,8 +37,8 @@ class EnemiesController < ApplicationController
         end
       end
       if game_character_hp > 0
-        @battle_info << "You Win!, you earned: #{enemy.xp} EXP and #{enemy.gold} Gold!"
-        game_character.update(xp: game_character.xp + enemy.xp, gold: game_character.gold + enemy.gold, energy: game_character.energy - @enemy.level)
+        @battle_info << "You Win!, you earned: #{@enemy.xp} EXP and #{@enemy.gold} Gold!"
+        game_character.update(xp: game_character.xp + @enemy.xp, gold: game_character.gold + @enemy.gold, energy: game_character.energy - @enemy.level)
       else
         @battle_info << "You Lose!"
         game_character.update(energy: game_character.energy - @enemy.level)

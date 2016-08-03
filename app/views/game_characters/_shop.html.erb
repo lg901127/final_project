@@ -3,11 +3,13 @@
     <span item-id="shopItem.id" />
     <li class="list-group-item list-group-item-info" ng-click="itemDetail = !itemDetail">
       {{ shopItem.name }}  ${{ shopItem.price }}
+      <button ng-click="buy(shopItem.id)">Buy</button>
       <div ng-show="itemDetail">
+        <img src="{{shopItem.url}}" class="pull-right">
         <p>{{ shopItem.description }}</p>
         <p>{{ shopItem.Strength ? "Strength: " + shopItem.Strength : "" }} {{ shopItem.Constitution ? "Constitution: " + shopItem.Constitution : "" }}</p>
+        <div class="segment" />
       </div>
-      <button class="pull-right">Buy</button>
     </li>
   </ul>
 </div>
