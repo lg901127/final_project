@@ -1,0 +1,22 @@
+<div ng-hide="playerChallengeHideStatus">
+  <ul class="list-group" ng-repeat="player in players">
+    <li class="list-group-item">
+      <a class="media-left">
+        <img class="media-object" src="http://www.realestatetaxgroup.com/wp-content/uploads/2013/03/empty-profile.png" alt="Generic placeholder image" width="64px" height="64px">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">{{ player.name }}</h4>
+        <p>Level: {{ player.level }} Exp: {{ player.level * 5 }}  Gold: {{ player.level * 5 }}  Energy Cost: {{ player.level }}</p>
+      </div>
+      <div class="media-right">
+        <span ng-if="game_character.energy >= player.level">
+          <a ng-href="/users/{{ user_id }}/game_characters/{{ game_character_id }}/player_challenges/{{ player.id }}">Challenge</a>
+        </span>
+        <span ng-if="game_character.energy < player.level">
+          <span class="label label-warning">Not Enough Energy</span>
+        </span>
+      </div>
+    </li>
+  </ul>
+</div>
+<div ng-show="playerChallengeHideStatus">

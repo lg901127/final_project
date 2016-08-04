@@ -1,4 +1,4 @@
-<div ng-controller="itemController" ng-hide="inventoryHideStatus">
+<div ng-hide="inventoryHideStatus">
   <ul ng-repeat="item in items" class="media-list">
     <li class="media">
       <a class="media-left">
@@ -6,6 +6,7 @@
       </a>
       <div class="media-body">
         <h4 class="media-heading" ng-click="itemDetail = !itemDetail">{{ item.name }}</h4>
+        <button ng-click="sell(item.id)" class="pull-right">Sell</button>
         <div ng-show="itemDetail">
           <p>{{ item.description }}</p>
           <p>{{ item.Strength ? "Strength: " + item.Strength : "" }} {{ item.Constitution ? "Constitution: " + item.Constitution : "" }}</p>
@@ -15,3 +16,4 @@
   </ul>
 </div>
 <div ng-show="inventoryHideStatus">
+   

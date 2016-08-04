@@ -53,7 +53,7 @@ class GameCharactersController < ApplicationController
       format.json { render json: items_info }
     end
   end
-
+   
   def new
   end
 
@@ -179,6 +179,7 @@ class GameCharactersController < ApplicationController
     items_info = []
     game_character.game_character_items.each do |item|
       item_info = {
+        id: item.id,
         name: Item.find(item.item_id).name,
         description: Item.find(item.item_id).description,
         url: Item.find(item.item_id).image.url(:small)

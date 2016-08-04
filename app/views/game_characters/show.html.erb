@@ -1,5 +1,5 @@
 <div ng-app="menu">
-<h1><%= @game_character.name %> <%= link_to "Refresh", signin_with_fitbit_path, class: "btn btn-info" %></h1>
+<h1><%= image_tag @game_character.image.url(:small) %> <%= @game_character.name %> <%= link_to "Refresh", signin_with_fitbit_path, class: "btn btn-info" %></h1>
 <table class="table">
   <thead>
     <tr ng-controller="descriptionController">
@@ -55,15 +55,19 @@
     </tr>
   </tbody>
 </table>
-<div ng-controller="toggleController">
-  <button ng-click="toggleInventory()" class="btn btn-secondary">Inventory</button>
-  <button ng-click="toggleChart()" class="btn btn-secondary">Chart</button>
-  <button ng-click="toggleShop()" class="btn btn-secondary">Shop</button>
-  <button ng-click="toggleEnemy()" class="btn btn-secondary">Battle</button>
+<div class="segment" />
+<div ng-controller="menuController">
+  <button ng-click="toggleInventory()" class="btn btn-menu"><i class="fa fa-suitcase" aria-hidden="true"></i> Inventory</button>
+  <button ng-click="toggleChart()" class="btn btn-menu"><i class="fa fa-pie-chart" aria-hidden="true"></i> Chart</button>
+  <button ng-click="toggleShop()" class="btn btn-menu"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Shop</button>
+  <button ng-click="toggleEnemy()" class="btn btn-menu"><i class="fa fa-question-circle" aria-hidden="true"></i> Quest</button>
+  <button ng-click="toggleChallenge()" class="btn btn-menu"><i class="fa fa-users" aria-hidden="true"></i> Challenge</button>
+  <button class="btn btn-menu">Ranking</button>
   <div class="segment" />
     <%= render "inventory" %>
     <%= render "chart" %>
     <%= render "shop" %>
     <%= render "enemy_list" %>
+    <%= render "player_challenge" %>
 </div>
 </div>

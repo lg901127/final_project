@@ -1,0 +1,20 @@
+<ul class="list-group">
+  <% @players.each do |player| %>
+    <li class="list-group-item">
+      <a class="media-left">
+        <img class="media-object" src="http://www.realestatetaxgroup.com/wp-content/uploads/2013/03/empty-profile.png" alt="Generic placeholder image" width="64px" height="64px">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading"><%= player.name %></h4>
+        <p><%= "Level: #{player.level} EXP: #{player.xp} Gold: #{player.gold} Energy Cost: #{player.level}" %></p>
+      </div>
+      <div class="media-right">
+        <% if @game_character.energy >= player.level %>
+          <%= link_to "Battle", user_game_character_player_challenge_path(current_user, @game_character, player), class: "btn btn-danger" %>
+        <% else %>
+          <span class="label label-warning">Not Enough Energy</span>
+        <% end %>
+      </div>
+  <% end %>
+</ul>
+<%= link_to "Back", signin_with_fitbit_path, class: "btn btn-danger" %>

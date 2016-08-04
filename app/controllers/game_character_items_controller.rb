@@ -18,12 +18,15 @@ class GameCharacterItemsController < ApplicationController
   end
 
   def destroy
+
     user = User.find params[:user_id]
     game_character = user.game_character
     game_character_item = GameCharacterItem.find params[:id]
     sell_price = Item.find(game_character_item.item_id).price / 2
     game_character_item.destroy
     game_character.update(gold: game_character.gold + sell_price)
-    redirect_to user_game_character_path(user, game_character), notice: "Item Sold!"
+    head :ok
+    # redirect_to user_game_character_show_character_path(user, game_character), notice: "Item Sold!"
+    #redirect_to root_path
   end
 end

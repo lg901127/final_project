@@ -1,9 +1,9 @@
-<div ng-controller="shopController" ng-hide="shopHideStatus">
+<div ng-hide="shopHideStatus">
   <ul class='list-group' ng-repeat="shopItem in shopItems" class="list-group">
     <span item-id="shopItem.id" />
-    <li class="list-group-item list-group-item-info" ng-click="itemDetail = !itemDetail">
-      {{ shopItem.name }}  ${{ shopItem.price }}
-      <button ng-click="buy(shopItem.id)">Buy</button>
+    <li class="list-group-item list-group-item-info">
+      <span ng-click="itemDetail = !itemDetail">{{ shopItem.name }}  ${{ shopItem.price }}</span>
+      <button ng-click="buy(shopItem.id)" class="pull-right">Buy</button>
       <div ng-show="itemDetail">
         <img src="{{shopItem.url}}" class="pull-right">
         <p>{{ shopItem.description }}</p>

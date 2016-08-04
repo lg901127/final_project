@@ -1,0 +1,29 @@
+<script>
+  $(document).ready(function() {
+    $(".list-group").children().hide()
+    $(".list-group").children().each(function(index) {
+    $(this).delay(1000*index).fadeIn(1000);
+    });
+  });
+</script>
+<style>
+  .list-group-item {
+    border-radius: 20px;
+  }
+</style>
+<div class="card">
+  <img class="card-img-top" src="http://www.realestatetaxgroup.com/wp-content/uploads/2013/03/empty-profile.png"
+       alt="Card image cap">
+  <div class="card-block">
+    <h4 class="card-title"><%= @player.name %></h4>
+    <p class="card-text"><%= "Level: #{@player.level} EXP: #{@player.xp} Gold: #{@player.gold} Energy Cost: #{@player.level}" %></p>
+  </div>
+</div>
+<div class="jumbotron-fluid">
+  <div class="list-group">
+    <% @battle_info.each do |round| %>
+      <a class="list-group-item list-group-item-info" id="round"> <%= round %> </a>
+    <% end %>
+    <%= link_to "Back", signin_with_fitbit_path, class: "btn btn-danger" %>
+  </div>
+</div>
