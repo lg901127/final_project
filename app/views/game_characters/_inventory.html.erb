@@ -6,7 +6,7 @@
       </a>
       <div class="media-body">
         <h4 class="media-heading" ng-click="itemDetail = !itemDetail">{{ item.name }}</h4>
-        <button ng-click="sell(item.id)" class="pull-right">Sell</button>
+        <button ng-click="sell(item.id)" class="pull-right btn btn-menu">Sell</button>
         <div ng-show="itemDetail">
           <p>{{ item.description }}</p>
           <p>{{ item.Strength ? "Strength: " + item.Strength : "" }} {{ item.Constitution ? "Constitution: " + item.Constitution : "" }}</p>
@@ -16,4 +16,3 @@
   </ul>
 </div>
 <div ng-show="inventoryHideStatus">
-   

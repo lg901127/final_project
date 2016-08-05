@@ -1,9 +1,9 @@
 <h1>Character</h1>
-<div class="col-sm-12 text-center full-height">
+<div class="col-sm-6 col-sm-offset-3 text-center full-height" id="login">
   <% if @game_character %>
     <div class="card">
       <% if @game_character.image.url %>
-        <%= image_tag @game_character.image.url(:small) %>
+        <%= image_tag @game_character.image.url(:small), class: "profile-img" %>
       <% else %>
         <%= render 'image_uploader' %>
       <% end %>
@@ -12,7 +12,7 @@
          <p class="card-text"> Level: <%= @game_character.level %></p>
          <p class="card-text"> Exp: <%= @game_character.xp %></p>
          <p class="card-text"> Gold: <%= @game_character.gold %></p>
-         <p><%= link_to "Login", signin_with_fitbit_path, class: "btn btn-primary btn-block" %></p>
+         <p><%= link_to "Login", signin_with_fitbit_path, class: "btn btn-menu" %></p>
         </div>
     </div>
   <% else %>

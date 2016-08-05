@@ -1,73 +1,82 @@
-<div ng-app="menu">
-<h1><%= image_tag @game_character.image.url(:small) %> <%= @game_character.name %> <%= link_to "Refresh", signin_with_fitbit_path, class: "btn btn-info" %></h1>
-<table class="table">
-  <thead>
-    <tr ng-controller="descriptionController">
-      <th class="col-sm-2">Level</th>
-      <th class="col-sm-2">
-        <a ng-mouseover="expDescription = true" ng-mouseleave="expDescription = false">
-          <%= image_tag "icons/xp.png", size: "32" %>
-        </a>
-        <span ng-show="expDescription" class="stat-descriptions">Experience</span>
-      </th>
-      <th class="col-sm-2">
-        <a ng-mouseover="goldDescription = true" ng-mouseleave="goldDescription = false">
-          <%= image_tag "icons/coin.png", size: "32" %>
-        </a>
-        <span ng-show="goldDescription">Gold</span>
-      </th>
-      <th class="col-sm-2">
-        <a ng-mouseover="energyDescription = true" ng-mouseleave="energyDescription = false">
-          <%= image_tag "icons/heart.png", size: "32" %>
-        </a>
-        <span ng-show="energyDescription">Energy</span>
-      </th>
-      <th class="col-sm-2">
-        <a ng-mouseover="strengthDescription = true" ng-mouseleave="strengthDescription = false">
-          <%= image_tag "icons/sword.png", size: "32" %>
-        </a>
-        <span ng-show="strengthDescription">Strength</span>
-      </th>
-      <th class="col-sm-2">
-        <a ng-mouseover="constitutionDescription = true" ng-mouseleave="constitutionDescription = false">
-          <%= image_tag "icons/shield.png", size: "32" %>
-        </a>
-        <span ng-show="constitutionDescription">Constitution</span>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @game_character.level %></td>
-      <td><%= @game_character.xp %></td>
-      <td><%= @game_character.gold %></td>
-      <td><%= @game_character.energy %></td>
-      <% if @game_character.xp > $strength_xp_cost %>
-        <td><%= parse_strength(@game_character) %> <%= link_to fa_icon("plus-square") + " Exp cost: #{$strength_xp_cost}", user_game_character_add_strength_path(current_user, @game_character), method: :put %> </td>
-      <% else %>
-        <td><%= parse_strength(@game_character) %></td>
-      <% end %>
-      <% if @game_character.xp > $constitution_xp_cost %>
-        <td><%= parse_constitution(@game_character) %> <%= link_to fa_icon("plus-square") + " Exp cost: #{$constitution_xp_cost}", user_game_character_add_constitution_path(current_user, @game_character), method: :put %> </td>
-      <% else %>
-        <td><%= parse_constitution(@game_character) %></td>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
-<div class="segment" />
-<div ng-controller="menuController">
-  <button ng-click="toggleInventory()" class="btn btn-menu"><i class="fa fa-suitcase" aria-hidden="true"></i> Inventory</button>
-  <button ng-click="toggleChart()" class="btn btn-menu"><i class="fa fa-pie-chart" aria-hidden="true"></i> Chart</button>
-  <button ng-click="toggleShop()" class="btn btn-menu"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Shop</button>
-  <button ng-click="toggleEnemy()" class="btn btn-menu"><i class="fa fa-question-circle" aria-hidden="true"></i> Quest</button>
-  <button ng-click="toggleChallenge()" class="btn btn-menu"><i class="fa fa-users" aria-hidden="true"></i> Challenge</button>
-  <button class="btn btn-menu">Ranking</button>
+<div ng-app="menu" class="menu">
+  <h1><%= image_tag @game_character.image.url(:small), class: "profile-img" %> <%= @game_character.name %> <%= link_to "Refresh", signin_with_fitbit_path, class: "btn btn-info" %> <button id="start-tour" class="btn btn-menu btn-circle pull-right"><i class="fa fa-question" aria-hidden="true"></i></button> </h1>
+  <table class="table">
+    <thead>
+      <tr ng-controller="descriptionController">
+        <th class="col-sm-2" id="menu-level"><em>Level</em></th>
+        <th class="col-sm-2">
+          <a ng-mouseover="expDescription = true" ng-mouseleave="expDescription = false">
+            <%= image_tag "icons/xp.png", id: "menu-exp", size: "32" %>
+          </a>
+          <span ng-show="expDescription" class="stat-descriptions">Experience</span>
+        </th>
+        <th class="col-sm-2">
+          <a ng-mouseover="goldDescription = true" ng-mouseleave="goldDescription = false">
+            <%= image_tag "icons/coin.png", id: "menu-gold", size: "32" %>
+          </a>
+          <span ng-show="goldDescription">Gold</span>
+        </th>
+        <th class="col-sm-2">
+          <a ng-mouseover="energyDescription = true" ng-mouseleave="energyDescription = false">
+            <%= image_tag "icons/heart.png", id: "menu-energy", size: "32" %>
+          </a>
+          <span ng-show="energyDescription">Energy</span>
+        </th>
+        <th class="col-sm-2">
+          <a ng-mouseover="strengthDescription = true" ng-mouseleave="strengthDescription = false">
+            <%= image_tag "icons/sword.png", id: "menu-strength", size: "32" %>
+          </a>
+          <span ng-show="strengthDescription">Strength</span>
+        </th>
+        <th class="col-sm-2">
+          <a ng-mouseover="constitutionDescription = true" ng-mouseleave="constitutionDescription = false">
+            <%= image_tag "icons/shield.png", id: "menu-constitution", size: "32" %>
+          </a>
+          <span ng-show="constitutionDescription">Constitution</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @game_character.level %></td>
+        <td><%= @game_character.xp %></td>
+        <td><%= @game_character.gold %></td>
+        <td><%= @game_character.energy %></td>
+        <% if @game_character.xp > $strength_xp_cost %>
+          <td><%= parse_strength(@game_character) %> <%= link_to fa_icon("plus-square") + " Exp cost: #{$strength_xp_cost}", user_game_character_add_strength_path(current_user, @game_character), method: :put %> </td>
+        <% else %>
+          <td><%= parse_strength(@game_character) %></td>
+        <% end %>
+        <% if @game_character.xp > $constitution_xp_cost %>
+          <td><%= parse_constitution(@game_character) %> <%= link_to fa_icon("plus-square") + " Exp cost: #{$constitution_xp_cost}", user_game_character_add_constitution_path(current_user, @game_character), method: :put %> </td>
+        <% else %>
+          <td><%= parse_constitution(@game_character) %></td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
   <div class="segment" />
+  <div ng-controller="menuController">
+    <span class="col-sm-2 col-sm-offset-1">
+      <button ng-click="toggleInventory()" class="btn btn-menu" id="inventory-btn"><i class="fa fa-suitcase" aria-hidden="true"></i> Inventory</button>
+    </span>
+    <span class="col-sm-2">
+      <button ng-click="toggleChart()" class="btn btn-menu" id="chart-btn"><i class="fa fa-pie-chart" aria-hidden="true"></i> Charts</button>
+    </span>
+    <span class="col-sm-2">
+      <button ng-click="toggleShop()" class="btn btn-menu" id="shop-btn"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Shop</button>
+    </span>
+    <span class="col-sm-2">
+      <button ng-click="toggleEnemy()" class="btn btn-menu" id="quest-btn"><i class="fa fa-question-circle" aria-hidden="true"></i> Quest</button>
+    </span>
+    <span class="col-sm-2">
+      <button ng-click="toggleChallenge()" class="btn btn-menu" id="challenge-btn"><i class="fa fa-users" aria-hidden="true"></i> Challenge</button>
+    </span>
+    <div class="segment col-sm-12" />
     <%= render "inventory" %>
     <%= render "chart" %>
     <%= render "shop" %>
     <%= render "enemy_list" %>
     <%= render "player_challenge" %>
-</div>
+  </div>
 </div>

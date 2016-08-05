@@ -17,7 +17,27 @@
 
 .segment {
   margin: 30px;
+  clear: both;
 }
+
+body {
+  background: url("backgrounds/background.jpg");
+  background-repeat: repeat;
+}
+
+.container {
+  color: lightgrey;
+  font-family: 'Nunito', sans-serif;
+}
+
+#login {
+  background: url("backgrounds/login_bg.jpg");
+  background-repeat: repeat;
+  -webkit-box-shadow: 0px 0px 30px 0px rgba(74,65,74,1);
+  -moz-box-shadow: 0px 0px 30px 0px rgba(74,65,74,1);
+  box-shadow: 0px 0px 30px 0px rgba(74,65,74,1);
+}
+
 #project-name {
   margin-top: 150px;
   margin-bottom: 50px;

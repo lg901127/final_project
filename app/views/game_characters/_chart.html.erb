@@ -1,7 +1,29 @@
+<script>
+$(document).ready(function() {
+  $("#area-chart").hide();
+  $("div .menu").on("click", "#switch-pie", function(){
+    $("#area-chart").hide("clip", function() {
+      $("#pie-chart").show("clip");
+    })
+  })
+  $("div .menu").on("click", "#switch-area", function(){
+    $("#pie-chart").hide("clip", function() {
+      $("#area-chart").show("clip");
+    })
+  })
+})
+</script>
 <div ng-hide="chartHideStatus">
-  <%= high_chart("my_id4", @chart) do |c| %>
+  <button id="switch-area" class="btn btn-menu pull-left">Area</button>
+  <button id="switch-pie" class="btn btn-menu pull-left">Pie</button>
+  <div class="col-sm-6" id="area-chart">
+    <%= high_chart("some_id", @chart) %>
+  </div>
+  <div class="col-sm-6" id="pie-chart">
+  <%= high_chart("my_id4", @pie_chart) do |c| %>
     <%= raw "options.tooltip.formatter = function() {return '<b>'+ this.point.name +'</b>: '+ this.y +' mins';}"  %>
     <%= raw "options.plotOptions.pie.dataLabels.formatter = function() { if (this.y > 5) return this.point.name; }"  %>
   <% end %>
+  </div>
 </div>
 <div ng-show="chartHideStatus">
