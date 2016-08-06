@@ -4,10 +4,10 @@ class GameCharactersController < ApplicationController
   def index
     user = User.find_by_id params[:user_id]
     @game_character = user.game_character
-    info = char_data_series(@game_character)
+    items_info = char_items(@game_character)
     respond_to do |format|
       format.html
-      format.json { render json: info }
+      format.json { render json: items_info }
     end
   end
 
@@ -16,17 +16,11 @@ class GameCharactersController < ApplicationController
     @game_character_items = @game_character.game_character_items
     $strength_xp_cost = @game_character.game_character_attributes.find_by_stat_id(13).value * 10
     $constitution_xp_cost = @game_character.game_character_attributes.find_by_stat_id(14).value * 10
-    char_xp_gold_calculation(@game_character)
-    time_info = char_active_time(@game_character)
+    time_info = char_xp_gold_calculation(@game_character)
     series_info = char_data_series(@game_character)
     char_energy_calculation(@game_character, time_info)
-    items_info = char_items(@game_character)
     @pie_chart = pie_chart(time_info)
     @chart = area_chart(series_info)
-    respond_to do |format|
-      format.html
-      format.json { render json: items_info }
-    end
   end
 
   def new
@@ -157,6 +151,7 @@ class GameCharactersController < ApplicationController
         game_character.update(xp: game_character.xp + xp_gain, gold: game_character.gold + gold_gain, calories: calories, steps: steps)
       end
     end
+    information
   end
 
   def area_chart(series_info)

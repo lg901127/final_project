@@ -5,7 +5,7 @@ menu.controller('menuController', function($scope, $http, $location){
   $scope.user_id = user_id;
   var game_character_id = (/game_characters\/(\d+)/.exec($location.absUrl())[1]);
   $scope.game_character_id = game_character_id;
-  var inventory_url = "http://localhost:3000/users/" + user_id + "/game_characters/" + game_character_id +".json";
+  var inventory_url = "http://localhost:3000/users/" + user_id + "/game_characters.json";
   $http.get(inventory_url).success(function(response) {
     $scope.items = response;
   });

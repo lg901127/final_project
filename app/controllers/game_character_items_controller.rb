@@ -8,12 +8,15 @@ class GameCharacterItemsController < ApplicationController
     item = Item.find params[:item_id]
     if game_character.gold >= item.price
       if GameCharacterItem.give_items_to_character(game_character, item)
-        redirect_to user_game_character_path(user, game_character), notice: "#{item.name} is in your inventory!"
+        # redirect_to user_game_character_path(user, game_character), notice: "#{item.name} is in your inventory!"
+        head :ok
       else
-        redirect_to user_game_character_path(user, game_character), alert: "You cannot have more than 6 items!"
+        # redirect_to user_game_character_path(user, game_character), alert: "You cannot have more than 6 items!"
+        head :ok
       end
     else
-      redirect_to user_game_character_path(user, game_character), alert: "Not enough gold!"
+      # redirect_to user_game_character_path(user, game_character), alert: "Not enough gold!"
+      head :ok
     end
   end
 
