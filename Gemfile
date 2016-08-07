@@ -42,6 +42,7 @@ gem 'omniauth-fitbit-oauth2'
 gem 'faraday'
 gem 'lazy_high_charts'
 gem 'angularjs-rails'
+gem 'merit'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

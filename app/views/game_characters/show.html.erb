@@ -2,7 +2,7 @@
   <h1>
     <%= image_tag @game_character.image.url(:small), class: "profile-img" %>
     <%= @game_character.name %>
-    <%= link_to "Refresh", signin_with_fitbit_path, class: "btn btn-info" %> 
+    <%= link_to "Refresh", signin_with_fitbit_path, class: "btn btn-info" %>
     <button id="start-tour" class="btn btn-menu btn-circle pull-right"><i class="fa fa-question" aria-hidden="true"></i></button>
   </h1>
   <table class="table">
@@ -60,6 +60,11 @@
       </tr>
     </tbody>
   </table>
+  <ul class="list-inline">
+  <% @game_character.badges.each do |badge| %>
+    <li><%= badge.name %></li>
+  <% end %>
+  </ul>
   <div class="segment" />
   <div ng-controller="menuController">
     <span class="col-sm-2 col-sm-offset-1">
