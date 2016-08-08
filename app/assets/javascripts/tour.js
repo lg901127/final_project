@@ -66,6 +66,12 @@ var tour = {
       content: "Challenge other players.",
       target: "challenge-btn",
       placement: "bottom"
+    },
+    {
+      title: "Achievement",
+      content: "You can complete achievements and acquire badges by reaching certain goals.",
+      target: "achievement-btn",
+      placement: "left"
     }
   ]
 };

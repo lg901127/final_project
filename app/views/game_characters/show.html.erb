@@ -1,4 +1,5 @@
 <div ng-app="menu" class="menu">
+  <div ng-controller="menuController">
   <h1>
     <%= image_tag @game_character.image.url(:small), class: "profile-img" %>
     <%= @game_character.name %>
@@ -45,29 +46,22 @@
       <tr>
         <td><%= @game_character.level %></td>
         <td><%= @game_character.xp %></td>
-        <td><%= @game_character.gold %></td>
+        <td>{{ gold }}</td>
         <td><%= @game_character.energy %></td>
         <% if @game_character.xp > $strength_xp_cost %>
-          <td><%= parse_strength(@game_character) %> <%= link_to fa_icon("plus-square") + " Exp cost: #{$strength_xp_cost}", user_game_character_add_strength_path(current_user, @game_character), method: :put %> </td>
+          <td>{{ character_strength }} <%= link_to fa_icon("plus-square") + " Exp cost: #{$strength_xp_cost}", user_game_character_add_strength_path(current_user, @game_character), method: :put %> </td>
         <% else %>
-          <td><%= parse_strength(@game_character) %></td>
+          <td>{{ character_strength }}</td>
         <% end %>
         <% if @game_character.xp > $constitution_xp_cost %>
-          <td><%= parse_constitution(@game_character) %> <%= link_to fa_icon("plus-square") + " Exp cost: #{$constitution_xp_cost}", user_game_character_add_constitution_path(current_user, @game_character), method: :put %> </td>
+          <td>{{ character_constitution }} <%= link_to fa_icon("plus-square") + " Exp cost: #{$constitution_xp_cost}", user_game_character_add_constitution_path(current_user, @game_character), method: :put %> </td>
         <% else %>
-          <td><%= parse_constitution(@game_character) %></td>
+          <td>{{ character_constitution }}</td>
         <% end %>
       </tr>
     </tbody>
   </table>
-  <ul class="list-inline">
-  <% @game_character.badges.each do |badge| %>
-    <li><%= badge.name %></li>
-  <% end %>
-  </ul>
-  <div class="segment" />
-  <div ng-controller="menuController">
-    <span class="col-sm-2 col-sm-offset-1">
+    <span class="col-sm-2">
       <button ng-click="toggleInventory()" class="btn btn-menu" id="inventory-btn"><i class="fa fa-suitcase" aria-hidden="true"></i> Inventory</button>
     </span>
     <span class="col-sm-2">
@@ -82,11 +76,17 @@
     <span class="col-sm-2">
       <button ng-click="toggleChallenge()" class="btn btn-menu" id="challenge-btn"><i class="fa fa-users" aria-hidden="true"></i> Challenge</button>
     </span>
-    <div class="segment col-sm-12" />
+    <span class="col-sm-2">
+      <button ng-click="toggleAchievement()" class="btn btn-menu" id="achievement-btn"><i class="fa fa-trophy" aria-hidden="true"></i> Achievement</button>
+    </span>
+    <div class="segment col-sm-12"></div>
+    <div style="clear: both;">
     <%= render "inventory" %>
     <%= render "chart" %>
     <%= render "shop" %>
     <%= render "enemy_list" %>
     <%= render "player_challenge" %>
+    <%= render "achievement" %>
+    </div>
   </div>
 </div>

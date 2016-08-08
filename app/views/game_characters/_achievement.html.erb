@@ -1,0 +1,18 @@
+<div ng-hide="achievementHideStatus">
+  <ul class="col-border col-sm-4">
+    <% @game_character.badges.each do |badge| %>
+      <p class="achieved"><%= image_tag badge.custom_fields[:url], size: "24" %> <%= badge.name %></p>
+      <p class="achieved"><%= badge.description %></p>
+    <% end %>
+  </ul>
+  <ul class="col-border col-sm-4">
+    <% Merit::Badge.all.each do |badge| %>
+      <% unless badge.game_characters.include? @game_character %>
+        <p class="unachieved"><%= image_tag badge.custom_fields[:url], size: "24"%> <%= badge.name %></p>
+        <p class="unachieved"><%= badge.description %></p>
+      <% end %>
+    <% end %>
+  </ul>
+  <div class="col-border col-sm-4"><%= render "badge_count" %></div>
+</div>
+<div ng-show="achievementHideStatus">

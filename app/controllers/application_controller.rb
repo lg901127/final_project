@@ -25,4 +25,37 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, alert: "access denied" unless session[:user_id] = current_user.id
   end
 
+  def badge_count(game_character)
+    bronze_count = 0
+    silver_count = 0
+    gold_count = 0
+    bronze_badge_url = "icons/green.png"
+    silver_badge_url = "icons/grey.png"
+    gold_badge_url = "icons/dark_yellow.png"
+    game_character.badges.each do |badge|
+      if badge.custom_fields[:difficulty] == :bronze
+        bronze_count += 1
+      elsif badge.custom_fields[:difficulty] == :silver
+        silver_count += 1
+      elsif badge.custom_fields[:difficulty] == :gold
+        gold_count += 1
+      end
+    end
+    {
+      gold: {
+        count: gold_count,
+        url: gold_badge_url
+      },
+      silver: {
+        count: silver_count,
+        url: silver_badge_url
+      },
+      bronze: {
+        count: bronze_count,
+        url: bronze_badge_url
+      }
+    }
+  end
+  helper_method :badge_count
+
 end

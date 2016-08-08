@@ -38,4 +38,5 @@ class GameCharacter < ActiveRecord::Base
     GameCharacterAttribute.create(game_character: game_character, stat: constitution)
     game_character
   end
+
 end

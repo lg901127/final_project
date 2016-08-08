@@ -30,6 +30,18 @@ module Merit
       grant_on 'game_characters#show', badge_id: 3, to: :itself do |game_character|
         game_character.xp >= 5000
       end
+      grant_on 'game_characters#show', badge_id: 4, to: :itself do |game_character|
+        game_character.gold >= 1000
+      end
+      grant_on 'game_characters#show', badge_id: 5, to: :itself do |game_character|
+        game_character.gold >= 10000
+      end
+      grant_on 'game_characters#show', badge_id: 6, to: :itself do |game_character|
+        game_character.gold >= 50000
+      end
+      grant_on 'game_characters#show', badge_id: 7, to: :itself do |game_character|
+        game_character.sedentary_minutes >= 1000
+      end
     end
   end
 end

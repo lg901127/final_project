@@ -1,5 +1,6 @@
-<h1>Sign In</h1>
-<%= form_tag sessions_path do %>
+<div class="login-page">
+  <h1>Sign In</h1>
+  <%= form_tag sessions_path do %>
   <div>
     <%= label_tag :email %>
     <%= email_field_tag :email, "", class: "form-control" %>
@@ -8,6 +9,7 @@
     <%= label_tag :password %>
     <%= password_field_tag :password, "", class: "form-control" %>
   </div>
-  <%= submit_tag "Sign in", class: "btn btn-warning" %>
-
-<% end %>
+  <div class="segment col-sm-12"></div>
+  <%= submit_tag "Sign in", class: "btn btn-menu" %>
+  <% end %>
+</div>

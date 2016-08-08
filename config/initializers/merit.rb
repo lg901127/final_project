@@ -21,19 +21,43 @@ Merit.setup do |config|
     id: 1,
     name: "Noob",
     description: "Gained 500 exp",
-    custom_fields: { difficulty: :bronze }
+    custom_fields: { difficulty: :bronze, url: "icons/green.png" }
   )
   Merit::Badge.create!(
     id: 2,
     name: "Warrior",
     description: "Gained 2000 exp",
-    custom_fields: { difficulty: :silver }
+    custom_fields: { difficulty: :silver, url: "icons/grey.png" }
   )
   Merit::Badge.create!(
     id: 3,
     name: "Veteran",
     description: "Gained 5000 exp",
-    custom_fields: { difficulty: :gold }
+    custom_fields: { difficulty: :gold, url: "icons/dark_yellow.png" }
+  )
+  Merit::Badge.create!(
+    id: 4,
+    name: "Start-up",
+    description: "Gained 1000 gold",
+    custom_fields: { difficulty: :bronze, url: "icons/green.png" }
+  )
+  Merit::Badge.create!(
+    id: 5,
+    name: "Merchant",
+    description: "Gained 10000 gold",
+    custom_fields: { difficulty: :silver, url: "icons/grey.png" }
+  )
+  Merit::Badge.create!(
+    id: 6,
+    name: "Mr.Rockefeller",
+    description: "Gained 50000 gold",
+    custom_fields: { difficulty: :gold, url: "icons/dark_yellow.png" }
+  )
+  Merit::Badge.create!(
+    id: 7,
+    name: "Lazybones",
+    description: "You sit for too long!!",
+    custom_fields: { difficulty: :bronze, url: "icons/blue.png" }
   )
 end
 

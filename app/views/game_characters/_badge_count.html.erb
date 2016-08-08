@@ -1,0 +1,4 @@
+<h3>Your Badges</h4>
+<% badge_count(@game_character).each_value do |badge| %>
+  <p><%= image_tag badge[:url], size: "24" %>: <%= badge[:count] %></p>
+<% end %>

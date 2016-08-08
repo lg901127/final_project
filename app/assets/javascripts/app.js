@@ -7,7 +7,10 @@ menu.controller('menuController', function($scope, $http, $location){
   $scope.game_character_id = game_character_id;
   var inventory_url = "http://localhost:3000/users/" + user_id + "/game_characters.json";
   $http.get(inventory_url).success(function(response) {
-    $scope.items = response;
+    $scope.items = response.character_items;
+    $scope.character_strength = response.character_strength;
+    $scope.character_constitution = response.character_constitution;
+    $scope.gold = response.gold;
   });
   $scope.itemDetail = false;
 
@@ -34,9 +37,12 @@ menu.controller('menuController', function($scope, $http, $location){
       url: "http://localhost:3000/users/" + user_id + "/items/" + item_id + "/game_character_items",
       data: {game_character: game_character_id, item: item_id}
     }).then(function() {
-      var url = "http://localhost:3000/users/" + user_id + "/game_characters/" + game_character_id +".json";
+      var url = "http://localhost:3000/users/" + user_id + "/game_characters.json";
       $http.get(url).success(function(response) {
-        $scope.items = response;
+        $scope.items = response.character_items;
+        $scope.character_strength = response.character_strength;
+        $scope.character_constitution = response.character_constitution;
+        $scope.gold = response.gold;
         $scope.chartHideStatus = true;
         $scope.shopHideStatus = true;
         $scope.enemyHideStatus = true;
@@ -50,9 +56,12 @@ menu.controller('menuController', function($scope, $http, $location){
       method: "DELETE",
       url: "http://localhost:3000/users/" + user_id + "/game_characters/" + game_character_id + "/game_character_items/" + item_id,
     }).then(function() {
-      var url = "http://localhost:3000/users/" + user_id + "/game_characters/" + game_character_id +".json";
+      var url = "http://localhost:3000/users/" + user_id + "/game_characters.json";
       $http.get(url).success(function(response) {
-        $scope.items = response;
+        $scope.items = response.character_items;
+        $scope.character_strength = response.character_strength;
+        $scope.character_constitution = response.character_constitution;
+        $scope.gold = response.gold;
       });
     });
   }
@@ -62,11 +71,13 @@ menu.controller('menuController', function($scope, $http, $location){
   $scope.shopHideStatus = true;
   $scope.enemyHideStatus = true;
   $scope.playerChallengeHideStatus = true;
+  $scope.achievementHideStatus = true;
   $scope.toggleInventory = function() {
     $scope.chartHideStatus = true;
     $scope.shopHideStatus = true;
     $scope.enemyHideStatus = true;
     $scope.playerChallengeHideStatus = true;
+    $scope.achievementHideStatus = true;
     $scope.inventoryHideStatus = $scope.inventoryHideStatus === false ? true : false;
   };
   $scope.toggleChart = function() {
@@ -74,6 +85,7 @@ menu.controller('menuController', function($scope, $http, $location){
     $scope.shopHideStatus = true;
     $scope.enemyHideStatus = true;
     $scope.playerChallengeHideStatus = true;
+    $scope.achievementHideStatus = true;
     $scope.chartHideStatus = $scope.chartHideStatus === false ? true : false;
   };
   $scope.toggleShop = function() {
@@ -81,6 +93,7 @@ menu.controller('menuController', function($scope, $http, $location){
     $scope.chartHideStatus = true;
     $scope.enemyHideStatus = true;
     $scope.playerChallengeHideStatus = true;
+    $scope.achievementHideStatus = true;
     $scope.shopHideStatus = $scope.shopHideStatus === false ? true : false;
   };
   $scope.toggleEnemy = function() {
@@ -88,6 +101,7 @@ menu.controller('menuController', function($scope, $http, $location){
     $scope.chartHideStatus = true;
     $scope.shopHideStatus = true;
     $scope.playerChallengeHideStatus = true;
+    $scope.achievementHideStatus = true;
     $scope.enemyHideStatus = $scope.enemyHideStatus === false ? true : false;
   };
   $scope.toggleChallenge = function() {
@@ -95,7 +109,16 @@ menu.controller('menuController', function($scope, $http, $location){
     $scope.chartHideStatus = true;
     $scope.shopHideStatus = true;
     $scope.enemyHideStatus = true;
+    $scope.achievementHideStatus = true;
     $scope.playerChallengeHideStatus = $scope.playerChallengeHideStatus === false ? true : false;
+  };
+  $scope.toggleAchievement = function() {
+    $scope.inventoryHideStatus = true;
+    $scope.chartHideStatus = true;
+    $scope.shopHideStatus = true;
+    $scope.enemyHideStatus = true;
+    $scope.playerChallengeHideStatus = true;
+    $scope.achievementHideStatus = $scope.achievementHideStatus === false ? true : false;
   };
 });
 

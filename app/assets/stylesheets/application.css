@@ -16,13 +16,17 @@
  */
 
 .segment {
-  margin: 30px;
+  margin: 15px;
   clear: both;
 }
 
 body {
   background: url("backgrounds/background.jpg");
   background-repeat: repeat;
+}
+
+body p {
+  font-size: 20px;
 }
 
 .container {
@@ -36,6 +40,10 @@ body {
   -webkit-box-shadow: 0px 0px 30px 0px rgba(74,65,74,1);
   -moz-box-shadow: 0px 0px 30px 0px rgba(74,65,74,1);
   box-shadow: 0px 0px 30px 0px rgba(74,65,74,1);
+}
+
+.col-border {
+  border-right: darkslategrey solid 3px;
 }
 
 #project-name {
@@ -60,6 +68,12 @@ body {
     background-size: cover;
     opacity: 0.5;
 }
+.achieved {
+  color: gold;
+}
+.unachieved {
+  color: grey;
+}
 .index-button {
   font-family: 'Oxygen', sans-serif;
   color: lightgrey;
@@ -67,6 +81,17 @@ body {
   border: 5px;
   border-radius: 50px;
   background-color: inherit;
+}
+.item-title {
+  font-size: 20px;
+  color: lightgrey;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #5e1111;
 }
 
 @keyframes hide {
@@ -105,6 +130,11 @@ body {
 .ng-hide-remove {
   -webkit-animation:0.3s show;
   animation:0.3s show;
+}
+
+.login-page{
+  padding-left: 200px;
+  padding-right: 200px;
 }
 
 @keyframes show {

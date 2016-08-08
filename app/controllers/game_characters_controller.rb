@@ -5,9 +5,15 @@ class GameCharactersController < ApplicationController
     user = User.find_by_id params[:user_id]
     @game_character = user.game_character
     items_info = char_items(@game_character)
+    strength = parse_strength(@game_character)
+    constitution = parse_constitution(@game_character)
     respond_to do |format|
-      format.html
-      format.json { render json: items_info }
+      format.json { render json: {
+                                  character_items: items_info,
+                                  character_strength: strength,
+                                  character_constitution: constitution,
+                                  gold: @game_character.gold
+                                  } }
     end
   end
 
