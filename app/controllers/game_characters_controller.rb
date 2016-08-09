@@ -237,7 +237,9 @@ class GameCharactersController < ApplicationController
     sedentary_minutes = information["summary"]["sedentaryMinutes"]
     if sedentary_minutes >= game_character.sedentary_minutes
       if game_character.energy < 100
+        energy_gap = 100 - game_character.energy
         energy_recovery = (sedentary_minutes - game_character.sedentary_minutes) / SEDENTARY_MINUTES_TO_ENERGY_RATIO
+        energy_recovery <= energy_gap ? energy_recovery = energy_recovery : energy_recovery = energy_gap
       else
         energy_recovery = 0
       end

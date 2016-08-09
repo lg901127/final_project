@@ -1,11 +1,17 @@
 <div ng-app="menu" class="menu">
   <div ng-controller="menuController">
+    {{ notice }}
   <h1>
-    <%= image_tag @game_character.image.url(:small), class: "profile-img" %>
+    <% if @game_character.image.url %>
+      <%= image_tag @game_character.image.url(:small), class: "profile-img" %>
+    <% else %>
+      <%= render '/users/image_uploader' %>
+    <% end %>
     <%= @game_character.name %>
     <%= link_to "Refresh", signin_with_fitbit_path, class: "btn btn-info" %>
     <button id="start-tour" class="btn btn-menu btn-circle pull-right"><i class="fa fa-question" aria-hidden="true"></i></button>
   </h1>
+  <div class="segment col-sm-12"></div>
   <table class="table">
     <thead>
       <tr ng-controller="descriptionController">

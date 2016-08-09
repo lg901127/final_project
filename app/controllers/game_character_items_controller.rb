@@ -12,11 +12,11 @@ class GameCharacterItemsController < ApplicationController
         head :ok
       else
         # redirect_to user_game_character_path(user, game_character), alert: "You cannot have more than 6 items!"
-        head :ok
+        head :not_acceptable
       end
     else
       # redirect_to user_game_character_path(user, game_character), alert: "Not enough gold!"
-      head :ok
+      head :not_acceptable
     end
   end
 

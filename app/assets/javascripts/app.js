@@ -5,6 +5,7 @@ menu.controller('menuController', function($scope, $http, $location){
   $scope.user_id = user_id;
   var game_character_id = (/game_characters\/(\d+)/.exec($location.absUrl())[1]);
   $scope.game_character_id = game_character_id;
+  $scope.notice = null;
   var inventory_url = "http://localhost:3000/users/" + user_id + "/game_characters.json";
   $http.get(inventory_url).success(function(response) {
     $scope.items = response.character_items;
@@ -43,11 +44,15 @@ menu.controller('menuController', function($scope, $http, $location){
         $scope.character_strength = response.character_strength;
         $scope.character_constitution = response.character_constitution;
         $scope.gold = response.gold;
+        $scope.notice = "Purchased!"
         $scope.chartHideStatus = true;
         $scope.shopHideStatus = true;
         $scope.enemyHideStatus = true;
         $scope.inventoryHideStatus = $scope.inventoryHideStatus === false;
-      });
+        })
+      }).catch(function() {
+        console.log("test");
+        $scope.notice = "Unsuccessful! Either your bag is full or you don't have enough gold!";
     });
   };
 
@@ -65,6 +70,8 @@ menu.controller('menuController', function($scope, $http, $location){
       });
     });
   }
+
+  $scope
 
   $scope.inventoryHideStatus = true;
   $scope.chartHideStatus = true;
