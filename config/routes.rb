@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root "home#index"
+  get "/about" => "home#about"
   get '/auth/:provider/callback' => 'callback#fitbit'
   get '/auth/fitbit_oauth2', as: :signin_with_fitbit
 

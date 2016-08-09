@@ -18,7 +18,10 @@
 //= require angular
 //= require angular-animate
 //= require angular-resource
+//= require angular-ui-bootstrap
 //= require highcharts/highcharts
 //= require highcharts/highcharts-more
 //= require highcharts/highstock
-//= require_tree .
+//= require_tree
+//= require underscore
+//= require gmaps/google

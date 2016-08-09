@@ -1,6 +1,17 @@
-var menu = angular.module('menu', ['ngAnimate']);
+var menu = angular.module('menu', ['ngAnimate', 'ui.bootstrap']);
 
 menu.controller('menuController', function($scope, $http, $location){
+
+  var noticeFadein = function() {
+    console.log('test');
+    $("#notice").hide();
+    $("#notice").fadeIn(1000, function() {
+      setTimeout(function() {
+        $("#notice").fadeOut(500);
+      }, 3000);
+    });
+  }
+
   var user_id = (/users\/(\d+)/.exec($location.absUrl())[1]);
   $scope.user_id = user_id;
   var game_character_id = (/game_characters\/(\d+)/.exec($location.absUrl())[1]);
@@ -45,14 +56,15 @@ menu.controller('menuController', function($scope, $http, $location){
         $scope.character_constitution = response.character_constitution;
         $scope.gold = response.gold;
         $scope.notice = "Purchased!"
+        noticeFadein();
         $scope.chartHideStatus = true;
         $scope.shopHideStatus = true;
         $scope.enemyHideStatus = true;
         $scope.inventoryHideStatus = $scope.inventoryHideStatus === false;
         })
       }).catch(function() {
-        console.log("test");
-        $scope.notice = "Unsuccessful! Either your bag is full or you don't have enough gold!";
+        $scope.notice = "You can't do that! Either your bag is full or you don't have enough gold!";
+        noticeFadein();
     });
   };
 
@@ -67,11 +79,13 @@ menu.controller('menuController', function($scope, $http, $location){
         $scope.character_strength = response.character_strength;
         $scope.character_constitution = response.character_constitution;
         $scope.gold = response.gold;
+        $scope.notice = "Sold!";
+        noticeFadein();
       });
     });
   }
 
-  $scope
+
 
   $scope.inventoryHideStatus = true;
   $scope.chartHideStatus = true;

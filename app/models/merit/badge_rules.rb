@@ -40,7 +40,7 @@ module Merit
         game_character.gold >= 50000
       end
       grant_on 'game_characters#show', badge_id: 7, to: :itself do |game_character|
-        game_character.sedentary_minutes >= 1000
+        game_character.sedentary_minutes >= 1200
       end
     end
   end

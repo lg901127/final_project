@@ -1,6 +1,6 @@
-<div ng-app="menu" class="menu">
+<div ng-app="menu" class="menu ng-cloak">
   <div ng-controller="menuController">
-    {{ notice }}
+  <%= render "notice" %>
   <h1>
     <% if @game_character.image.url %>
       <%= image_tag @game_character.image.url(:small), class: "profile-img" %>

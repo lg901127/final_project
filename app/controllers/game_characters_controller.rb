@@ -13,7 +13,8 @@ class GameCharactersController < ApplicationController
                                   character_strength: strength,
                                   character_constitution: constitution,
                                   gold: @game_character.gold
-                                  } }
+                                  }
+                                }
     end
   end
 
@@ -100,7 +101,7 @@ class GameCharactersController < ApplicationController
   SEDENTARY_MINUTES_TO_ENERGY_RATIO = 5
 
   def char_level_calculation(strength_xp_cost, constitution_xp_cost)
-    return (strength_xp_cost + constitution_xp_cost)/ 10 / 4
+    return (strength_xp_cost + constitution_xp_cost)/ 10 / 2
   end
 
   def char_data_series(game_character)

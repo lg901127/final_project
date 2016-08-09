@@ -43,6 +43,9 @@ gem 'faraday'
 gem 'lazy_high_charts'
 gem 'angularjs-rails'
 gem 'merit'
+gem 'angular-ui-bootstrap-rails'
+gem 'underscore-rails'
+gem 'gmaps4rails'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
